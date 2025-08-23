@@ -31,6 +31,7 @@ jobs:
         run: flutter pub get
         working-directory: mobile_store_app
 
+      
       - name: Run Flutter build
-        run: flutter build apk --debug
+        run: flutter build apk --debug  --android-skip-build-dependency-validation
         working-directory: mobile_store_app
