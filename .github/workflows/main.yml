@@ -21,9 +21,12 @@ jobs:
         with:
           flutter-version: '3.13.6'  # حدد رقم النسخة بدل stable
           
+      - name: Navigate to Flutter projec
+        run: cd mobile_store_app  # غير الاسم حسب مجلد مشروعك
+        
       - name: Flutter Doctor
         run: flutter doctor -v
-
+        
       - name: Get Flutter dependencies
         run: flutter pub get
 
