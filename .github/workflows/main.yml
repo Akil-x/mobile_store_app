@@ -34,6 +34,12 @@ jobs:
         run: flutter pub get
         working-directory: mobile_store_app
 
+      - name: Patch Android Gradle Plugin for CI
+        run: |
+          sed -i 's/com.android.tools.build:gradle:8.1.0/com.android.tools.build:gradle:8.1.1/g' android/build.gradle || true
+          sed -i 's/id "com.android.application" version "8.1.0"/id "com.android.application" version "8.1.1"/g' android/settings.gradle || true
+        working-directory: mobile_store_app
+
       - name: Run Flutter build
         run: flutter build apk --debug --android-skip-build-dependency-validation
         working-directory: mobile_store_app
