@@ -19,7 +19,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.0' # حدد نسخة بدل stable لو تبي ثبات
+          flutter-version: '3.35.1'   # Dart >= 3.5.3
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
