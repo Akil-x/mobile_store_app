@@ -18,25 +18,22 @@ jobs:
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
-        # حدد رقم النسخة بدل stable
-          
-      - name: Navigate to Flutter projec
-        run: cd mobile_store_app  # غير الاسم حسب مجلد مشروعك
+        with:
+          flutter-version: '3.24.0' # حدد نسخة بدل stable لو تبي ثبات
+
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: 8.7
-          
+
       - name: Flutter Doctor
         run: flutter doctor -v
         working-directory: mobile_store_app
-        
-        
+
       - name: Get Flutter dependencies
         run: flutter pub get
         working-directory: mobile_store_app
 
-      
       - name: Run Flutter build
-        run: flutter build apk --debug  --android-skip-build-dependency-validation
+        run: flutter build apk --debug --android-skip-build-dependency-validation
         working-directory: mobile_store_app
