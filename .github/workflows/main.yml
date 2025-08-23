@@ -26,9 +26,12 @@ jobs:
         
       - name: Flutter Doctor
         run: flutter doctor -v
+        working-directory: mobile_store_app
         
       - name: Get Flutter dependencies
         run: flutter pub get
+        working-directory: mobile_store_app
 
       - name: Run Flutter build
         run: flutter build apk --debug
+        working-directory: mobile_store_app
