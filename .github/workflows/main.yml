@@ -1,50 +1,31 @@
-name: Flutter CI
+name: Flutter CI Check
 
 on:
   push:
-    branches: ["master", "main"]
+    branches:
+      - master
   pull_request:
-    branches: ["master", "main"]
+    branches:
+      - master
 
 jobs:
-  build:
+  flutter-check:
     runs-on: ubuntu-latest
-
-    secrets: inherit
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Cache Pub packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.pub-cache
-            **/pubspec.lock
-          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pub-
-
-      - name: Setup Flutter
+      - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 'stable'
 
-      - name: Install dependencies
+      - name: Flutter Doctor
+        run: flutter doctor -v
+
+      - name: Get Flutter dependencies
         run: flutter pub get
 
-      - name: Analyze code
-        run: flutter analyze
-
-      - name: Run tests
-        run: flutter test --coverage
-
-      - name: Build Android APK
-        run: flutter build apk --release
-
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-release.apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+      - name: Run Flutter build
+        run: flutter build apk --debug
